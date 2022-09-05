@@ -53,3 +53,34 @@ void loop()
   Serial.print("\n");
   delay(100);
 }
+
+
+// #define A 8
+// #define B 7
+// #define C 6
+// #define D 5
+// #define E 4
+// #define F 3
+// #define G 2
+// #define DP 9
+// #define common_cathode 0
+// #define common_anode 1
+
+// int seg[] {A, B, C, D, E, F, G, DP};
+
+// void setup()
+// {
+//   pinMode(seg[0],OUTPUT);
+//   pinMode(seg[1],OUTPUT);
+//   pinMode(seg[2],OUTPUT);
+//   pinMode(seg[3],OUTPUT);
+//   pinMode(seg[4],OUTPUT);
+//   pinMode(seg[5],OUTPUT);
+//   pinMode(seg[6],OUTPUT);
+//   pinMode(seg[7],OUTPUT);
+// }
+
+// void loop()
+// {
+//   Serial.println(seg[3]);
+// }
