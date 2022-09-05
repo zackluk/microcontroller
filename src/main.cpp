@@ -1,9 +1,15 @@
 #include <Arduino.h>
 
+int delay_value = 500;
+int led_pin = 26;
+
 void setup() {
-  // put your setup code here, to run once:
+  pinMode(led_pin, OUTPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  digitalWrite(led_pin, HIGH);
+  delay(delay_value); 
+  digitalWrite(led_pin, LOW);
+  delay(delay_value);
 }
