@@ -1,86 +1,284 @@
 #include <Arduino.h>
-#define MAX_DISTNACE 600
-#define ECHO_TIMEOUT MAX_DISTNACE * 2 * 29
-#define SPEED_OF_SOUND 0.034
 
-int echo_pin = 26;
-int trig_pin = 17;
-int led_pin = 25;
-
-int readValue()
-{
-  digitalWrite(trig_pin, LOW);
-  delayMicroseconds(2);
-
-  digitalWrite(trig_pin, HIGH);
-  delayMicroseconds(10);
-
-  digitalWrite(trig_pin, LOW);
-
-  unsigned long duration = pulseIn(echo_pin, HIGH, ECHO_TIMEOUT);
-
-  return duration * SPEED_OF_SOUND / 2;
-}
+int ledPin = 21;
+int switchPin = 27;
+int led2Pin = 19;
+int led3Pin = 2;
+int led4Pin = 15;
+int led5Pin = 14;
+bool buttonPressed = false;
+int counter = 0;
 
 void setup()
 {
-  pinMode(echo_pin, INPUT);
-  pinMode(trig_pin, OUTPUT);
-  pinMode(led_pin, OUTPUT);
   Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+  pinMode(switchPin, INPUT_PULLUP);
+  pinMode(led2Pin, OUTPUT);
+  pinMode(led3Pin, OUTPUT);
+  pinMode(led4Pin, OUTPUT);
+  pinMode(led5Pin, OUTPUT);
 }
 
-long map(long x, long in_min, long in_max, long out_min, long out_max)
+void changeAnimation()
 {
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  if (counter >= 2)
+  {
+    counter = 0;
+  }
+  else
+  {
+    counter++;
+  }
 }
+
+void animation1()
+{
+
+  digitalWrite(ledPin, HIGH);
+  delay(200);
+
+  digitalWrite(ledPin, LOW);
+  delay(500);
+
+  digitalWrite(led2Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led2Pin, LOW);
+  delay(500);
+
+  digitalWrite(led3Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led3Pin, LOW);
+  delay(500);
+
+  digitalWrite(led4Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led4Pin, LOW);
+  delay(500);
+
+  digitalWrite(led5Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led5Pin, LOW);
+  delay(500);
+
+  digitalWrite(led5Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led5Pin, LOW);
+  delay(500);
+
+  digitalWrite(led4Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led4Pin, LOW);
+  delay(500);
+
+  digitalWrite(led3Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led3Pin, LOW);
+  delay(500);
+
+  digitalWrite(led2Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led2Pin, LOW);
+  delay(500);
+
+  digitalWrite(ledPin, HIGH);
+  delay(200);
+
+  digitalWrite(ledPin, LOW);
+  delay(500);
+}
+void animation2()
+{
+  digitalWrite(ledPin, HIGH);
+  delay(200);
+  digitalWrite(led5Pin, HIGH);
+  delay(200);
+
+  digitalWrite(ledPin, LOW);
+  delay(500);
+  digitalWrite(led5Pin, LOW);
+  delay(500);
+
+  digitalWrite(led2Pin, HIGH);
+  delay(200);
+  digitalWrite(led4Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led2Pin, LOW);
+  delay(500);
+  digitalWrite(led4Pin, LOW);
+  delay(500);
+
+  digitalWrite(led3Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led3Pin, LOW);
+  delay(500);
+
+  digitalWrite(led3Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led3Pin, LOW);
+  delay(500);
+
+  digitalWrite(led2Pin, HIGH);
+  delay(200);
+  digitalWrite(led4Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led2Pin, LOW);
+  delay(500);
+  digitalWrite(led4Pin, LOW);
+  delay(500);
+
+  digitalWrite(ledPin, HIGH);
+  delay(200);
+  digitalWrite(led5Pin, HIGH);
+  delay(200);
+
+  digitalWrite(ledPin, LOW);
+  delay(500);
+  digitalWrite(led5Pin, LOW);
+  delay(500);
+}
+void animation3()
+{
+  digitalWrite(ledPin, HIGH);
+  delay(200);
+
+  digitalWrite(ledPin, LOW);
+  delay(500);
+
+  digitalWrite(ledPin, HIGH);
+  delay(200);
+
+  digitalWrite(ledPin, LOW);
+  delay(500);
+
+  digitalWrite(led2Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led2Pin, LOW);
+  delay(500);
+
+  digitalWrite(ledPin, HIGH);
+  delay(200);
+
+  digitalWrite(ledPin, LOW);
+  delay(500);
+
+  digitalWrite(led2Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led2Pin, LOW);
+  delay(500);
+
+  digitalWrite(led3Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led3Pin, LOW);
+  delay(500);
+
+  digitalWrite(ledPin, HIGH);
+  delay(200);
+
+  digitalWrite(ledPin, LOW);
+  delay(500);
+
+  digitalWrite(led2Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led2Pin, LOW);
+  delay(500);
+
+  digitalWrite(led3Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led3Pin, LOW);
+  delay(500);
+
+  digitalWrite(led4Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led4Pin, LOW);
+  delay(500);
+
+  digitalWrite(ledPin, HIGH);
+  delay(200);
+
+  digitalWrite(ledPin, LOW);
+  delay(500);
+
+  digitalWrite(led2Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led2Pin, LOW);
+  delay(500);
+
+  digitalWrite(led3Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led3Pin, LOW);
+  delay(500);
+
+  digitalWrite(led4Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led4Pin, LOW);
+  delay(500);
+
+  digitalWrite(led5Pin, HIGH);
+  delay(200);
+
+  digitalWrite(led5Pin, LOW);
+  delay(500);
+}
+
+
+void visualise()
+{
+  if(counter == 0)
+  {
+    animation1();
+  }
+  else if(counter == 1)
+  {
+    animation2();
+  }
+  else
+  {
+    animation3();
+  }
+
+}
+
 
 void loop()
 {
-  int distance = readValue();
-  if(distance > 100)
+
+  int buttonState = digitalRead(switchPin);
+  Serial.println(buttonState);
+  if (buttonState == HIGH)
   {
-    distance = 100;
+    buttonPressed = true;
+    return;
   }
+  else
+  {
+    if (buttonPressed)
+    {
+      changeAnimation();
+    }
 
-
-  int interpreted_distance = 255 - map(distance, 0, 100, 0, 255);
-
-  analogWrite(25, interpreted_distance);
-  Serial.print(distance);
-  Serial.print(", ");
-  Serial.print(interpreted_distance);
-  Serial.print("\n");
-  delay(100);
+    buttonPressed = false;
+    visualise();
+  }
 }
-
-
-// #define A 8
-// #define B 7
-// #define C 6
-// #define D 5
-// #define E 4
-// #define F 3
-// #define G 2
-// #define DP 9
-// #define common_cathode 0
-// #define common_anode 1
-
-// int seg[] {A, B, C, D, E, F, G, DP};
-
-// void setup()
-// {
-//   pinMode(seg[0],OUTPUT);
-//   pinMode(seg[1],OUTPUT);
-//   pinMode(seg[2],OUTPUT);
-//   pinMode(seg[3],OUTPUT);
-//   pinMode(seg[4],OUTPUT);
-//   pinMode(seg[5],OUTPUT);
-//   pinMode(seg[6],OUTPUT);
-//   pinMode(seg[7],OUTPUT);
-// }
-
-// void loop()
-// {
-//   Serial.println(seg[3]);
-// }
